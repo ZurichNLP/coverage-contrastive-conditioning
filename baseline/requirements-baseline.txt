@@ -1,0 +1,3 @@
+openkiwi==2.1.0
+scikit-learn==1.0.1
+jsonlines==2.0.0

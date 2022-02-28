@@ -1,0 +1,6 @@
+stanza==1.2.3
+transformers==4.16.2
+scikit-learn==1.0.1
+jsonlines==2.0.0
+dict-to-dataclass==0.0.8
+mosestokenizer==1.2.1

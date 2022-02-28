@@ -1,0 +1,35 @@
+use_gpu: true
+
+run:
+    output_dir: predictions
+    predict_on_data_partition: test
+
+data:
+    train:
+        input:
+            source: data/synthetic/zh-en.train.src.cleaned.truncated
+            target: data/synthetic/zh-en.train.mt.truncated
+        output:
+            source_tags: data/synthetic/zh-en.train.source_tags.cleaned.truncated
+            target_tags: data/synthetic/zh-en.train.tags.truncated
+    valid:
+        input:
+            source: data/synthetic/zh-en.valid.src.cleaned.truncated
+            target: data/synthetic/zh-en.valid.mt.truncated
+        output:
+            source_tags: data/synthetic/zh-en.valid.source_tags.cleaned.truncated
+            target_tags: data/synthetic/zh-en.valid.tags.truncated
+    test:
+        input:
+            source: data/synthetic/zh-en.test.src.cleaned.truncated
+            target: data/synthetic/zh-en.test.mt.truncated
+
+system:
+    batch_size: 16
+    num_data_workers: 0
+
+    model:
+        outputs:
+            word_level:
+                target: true
+                source: true

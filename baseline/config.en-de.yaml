@@ -1,0 +1,94 @@
+run:
+    experiment_name: v2
+    seed: 42
+    use_mlflow: false
+
+trainer:
+    deterministic: true
+    gpus: 1
+    epochs: 10
+
+    main_metric:
+        - source_tags_F1_MULT
+        - target_tags_F1_MULT
+
+    gradient_max_norm: 1.
+    gradient_accumulation_steps: 4
+
+    amp_level: O2
+    precision: 16
+
+    log_interval: 100
+    checkpoint:
+        validation_steps: 0.2
+        early_stop_patience: 10
+
+data:
+    train:
+        input:
+            source: data/synthetic/en-de.train.src
+            target: data/synthetic/en-de.train.mt
+        output:
+            source_tags: data/synthetic/en-de.train.source_tags
+            target_tags: data/synthetic/en-de.train.tags
+    valid:
+        input:
+            source: data/synthetic/en-de.valid.src
+            target: data/synthetic/en-de.valid.mt
+        output:
+            source_tags: data/synthetic/en-de.valid.source_tags
+            target_tags: data/synthetic/en-de.valid.tags
+    test:
+        input:
+            source: data/synthetic/en-de.test.src
+            target: data/synthetic/en-de.test.mt
+system:
+    class_name: XLMRoberta
+
+    batch_size: 8
+    num_data_workers: 4
+
+    model:
+        encoder:
+            model_name: xlm-roberta-large
+            interleave_input: false
+            freeze: false
+            use_mlp: false
+            pooling: mixed
+            freeze_for_number_of_steps: 1000
+
+        decoder:
+            hidden_size: 768
+            bottleneck_size: 768
+            dropout: 0.1
+
+        outputs:
+            word_level:
+                target: true
+                gaps: false
+                source: true
+                class_weights:
+                    target_tags:
+                        BAD: 3.0
+                    gap_tags:
+                        BAD: 3.0
+                    source_tags:
+                        BAD: 3.0
+            sentence_level:
+                hter: false
+                use_distribution: false
+                binary: false
+            n_layers_output: 2
+            sentence_loss_weight: 1
+
+        tlm_outputs:
+            fine_tune: false
+
+    optimizer:
+        class_name: adamw
+        learning_rate: 1e-05
+        warmup_steps: 0.1
+        training_steps: 50000
+
+    data_processing:
+        share_input_fields_encoders: true

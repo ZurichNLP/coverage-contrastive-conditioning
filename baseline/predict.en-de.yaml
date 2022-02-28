@@ -1,0 +1,35 @@
+use_gpu: true
+
+run:
+    output_dir: predictions
+    predict_on_data_partition: test
+
+data:
+    train:
+        input:
+            source: data/synthetic/en-de.train.src
+            target: data/synthetic/en-de.train.mt
+        output:
+            source_tags: data/synthetic/en-de.train.source_tags
+            target_tags: data/synthetic/en-de.train.tags
+    valid:
+        input:
+            source: data/synthetic/en-de.valid.src
+            target: data/synthetic/en-de.valid.mt
+        output:
+            source_tags: data/synthetic/en-de.valid.source_tags
+            target_tags: data/synthetic/en-de.valid.tags
+    test:
+        input:
+            source: data/synthetic/en-de.test.src
+            target: data/synthetic/en-de.test.mt
+
+system:
+    batch_size: 16
+    num_data_workers: 0
+
+    model:
+        outputs:
+            word_level:
+                target: true
+                source: true
