@@ -1,5 +1,5 @@
 
-Data and code for the paper ["As Little as Possible, as Much as Necessary: Detecting Over- and Undertranslations with Contrastive Conditioning"](https://openreview.net/pdf?id=txfPhtRZ_SW) (ACL 2022).
+Data and code for the paper ["As Little as Possible, as Much as Necessary: Detecting Over- and Undertranslations with Contrastive Conditioning"](https://aclanthology.org/2022.acl-short.53/) (ACL 2022).
 - Detect potential coverage errors simply using NMT models (e.g. from the Hugging Face Hub)
 - A dataset of synthetic coverage errors in EN–DE and ZH–EN machine translations
 
@@ -162,15 +162,17 @@ python -m evaluation.evaluate_on_synthetic_data \
 
 ## Citation
 ```bibtex
-@inproceedings{vamvas-sennrich-2022-coverage,
+@inproceedings{vamvas-sennrich-2022-little,
     title = "As Little as Possible, as Much as Necessary: Detecting Over- and Undertranslations with Contrastive Conditioning",
     author = "Vamvas, Jannis  and
       Sennrich, Rico",
-    booktitle = "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics",
+    booktitle = "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
     month = may,
     year = "2022",
     address = "Dublin, Ireland",
     publisher = "Association for Computational Linguistics",
-    url = "https://openreview.net/pdf?id=txfPhtRZ_SW",
+    url = "https://aclanthology.org/2022.acl-short.53",
+    pages = "490--500",
 }
+
 ```
